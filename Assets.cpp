@@ -7,14 +7,13 @@
 
 #include<string.h>
 //#include "Adafruit_FRAM_I2C.h" // PIO Lib: 658 -> https://platformio.org/lib/show/658/Adafruit%20FRAM%20I2C
-#include <Assets.h>
 #include <IAssetsDeviceSerialNrAdapter.h>
+#include <IPersistentDataMemory.h>
 #include <DbgCliTopic.h>
 #include <DbgTracePort.h>
 #include <DbgTraceLevel.h>
 #include <AssetsDbgCmd.h>
-#include <IPersistentDataMemory.h>
-#include <DetectorFakePersDataMemory.h>
+#include <Assets.h>
 
 Assets::Assets(IAssetsDeviceSerialNrAdapter* deviceSerialNrAdapter /*= 0*/, IPersistentDataMemory* persistentDataMemory /*= 0*/)
 : m_trPort(new DbgTrace_Port("assets", DbgTrace_Level::info))
@@ -60,7 +59,7 @@ void Assets::setPersistentDataMemory(IPersistentDataMemory* persistentDataMemory
   m_persistentDataMemory = persistentDataMemory;
   if (0 != m_persistentDataMemory)
   {
-	m_persistentDataMemory->setDeviceSerialNr(m_deviceSerialNr);
+    m_persistentDataMemory->setDeviceSerialNr(m_deviceSerialNr);
   }
 }
 
@@ -92,8 +91,8 @@ void Assets::setDeviceSerialNr(unsigned long int deviceSerialNr)
 unsigned int Assets::getDeviceId( char* deviceId, unsigned int len)
 {
   unsigned int count = 0;
-  const unsigned int addr = DetectorFakePersDataMemory::KT_devId * DetectorFakePersDataMemory::s_numMaxChars;
-  while ((0 != m_persistentDataMemory) && (count < len) && (count < DetectorFakePersDataMemory::s_numMaxChars))
+  const unsigned int addr = IPersistentDataMemory::KT_devId * IPersistentDataMemory::s_numMaxChars;
+  while ((0 != m_persistentDataMemory) && (count < len) && (count < IPersistentDataMemory::s_numMaxChars))
   {
     deviceId[count] = m_persistentDataMemory->read(addr + count);
     count++;
@@ -105,8 +104,8 @@ unsigned int Assets::getDeviceId( char* deviceId, unsigned int len)
 unsigned int Assets::getDevAddr(char* devAddr,  unsigned int len)
 {
   unsigned int count = 0;
-  const unsigned int addr = DetectorFakePersDataMemory::KT_devAddr * DetectorFakePersDataMemory::s_numMaxChars;
-  while ((0 != m_persistentDataMemory) && (count < len) && (count < DetectorFakePersDataMemory::s_numMaxChars))
+  const unsigned int addr = IPersistentDataMemory::KT_devAddr * IPersistentDataMemory::s_numMaxChars;
+  while ((0 != m_persistentDataMemory) && (count < len) && (count < IPersistentDataMemory::s_numMaxChars))
   {
     devAddr[count] = m_persistentDataMemory->read(addr + count);
     count++;
@@ -118,8 +117,8 @@ unsigned int Assets::getDevAddr(char* devAddr,  unsigned int len)
 unsigned int Assets::getNwkSKey(char* nwkSKey,  unsigned int len)
 {
   unsigned int count = 0;
-  const unsigned int addr = DetectorFakePersDataMemory::KT_nwkSKey * DetectorFakePersDataMemory::s_numMaxChars;
-  while ((0 != m_persistentDataMemory) && (count < len) && (count < DetectorFakePersDataMemory::s_numMaxChars))
+  const unsigned int addr = IPersistentDataMemory::KT_nwkSKey * IPersistentDataMemory::s_numMaxChars;
+  while ((0 != m_persistentDataMemory) && (count < len) && (count < IPersistentDataMemory::s_numMaxChars))
   {
     nwkSKey[count] = m_persistentDataMemory->read(addr + count);
     count++;
@@ -131,8 +130,8 @@ unsigned int Assets::getNwkSKey(char* nwkSKey,  unsigned int len)
 unsigned int Assets::getAppSKey(char* appSKey,  unsigned int len)
 {
   unsigned int count = 0;
-  const unsigned int addr = DetectorFakePersDataMemory::KT_appSKey * DetectorFakePersDataMemory::s_numMaxChars;
-  while ((0 != m_persistentDataMemory) && (count < len) && (count < DetectorFakePersDataMemory::s_numMaxChars))
+  const unsigned int addr = IPersistentDataMemory::KT_appSKey * IPersistentDataMemory::s_numMaxChars;
+  while ((0 != m_persistentDataMemory) && (count < len) && (count < IPersistentDataMemory::s_numMaxChars))
   {
     appSKey[count] = m_persistentDataMemory->read(addr + count);
     count++;

@@ -6,13 +6,13 @@
  */
 
 #include <stdlib.h>
-#include <Assets.h>
-#include <AssetsDbgCmd.h>
 #include <DbgCliTopic.h>
 #include <DbgTracePort.h>
 #include <DbgTraceLevel.h>
+#include <IPersistentDataMemory.h>
 #include <IAssetsDeviceSerialNrAdapter.h>
-#include <DetectorFakePersDataMemory.h>
+#include <Assets.h>
+#include <AssetsDbgCmd.h>
 
 AssetsDbgCmd_SetDeviceSerial::AssetsDbgCmd_SetDeviceSerial(Assets* assets)
 : DbgCli_Command(assets->getCliTopicAssetsDeviceSerial(), "set", "Set Device Serial Number.")
@@ -105,7 +105,7 @@ void AssetsDbgCmd_GetLoRaKeys::execute(unsigned int argc, const char** args, uns
       TR_PRINTF(m_assets->trPort(), DbgTrace_Level::alert, "Assets - LoRa Keys:");
       if (0 != m_assets->getPersistentDataMemory())
       {
-        char printBuffer[DetectorFakePersDataMemory::s_numMaxChars+1];
+        char printBuffer[IPersistentDataMemory::s_numMaxChars+1];
         m_assets->getDeviceId(printBuffer, sizeof(printBuffer));
         TR_PRINTF(m_assets->trPort(), DbgTrace_Level::alert, "- Device Id:               %s", printBuffer);
 

@@ -66,6 +66,9 @@ public:
    */
   unsigned int getAppSKey(  char* appSKey,  unsigned int len);
 
+public:
+  static const unsigned int s_numDevices = 10;
+
 private:
   DbgTrace_Port* m_trPort;
   DbgCli_Topic* m_dbgCliTopicAssets;

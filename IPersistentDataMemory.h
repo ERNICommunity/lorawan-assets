@@ -10,6 +10,18 @@
 
 class IPersistentDataMemory
 {
+public:
+  typedef enum
+  {
+    KT_devId   = 0,
+    KT_devAddr = 1,
+    KT_nwkSKey = 2,
+    KT_appSKey = 3,
+    KT_NumKeys
+  } KeyType;
+
+  static const unsigned int s_numMaxChars = 32;
+
 protected:
   /**
    * Constructor, protected since this is an Interface.
