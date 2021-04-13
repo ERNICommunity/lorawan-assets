@@ -57,10 +57,6 @@ IAssetsDeviceSerialNrAdapter* Assets::getDeviceSerialNrAdapter()
 void Assets::setPersistentDataMemory(IPersistentDataMemory* persistentDataMemory)
 {
   m_persistentDataMemory = persistentDataMemory;
-  if (0 != m_persistentDataMemory)
-  {
-    m_persistentDataMemory->setDeviceSerialNr(m_deviceSerialNr);
-  }
 }
 
 IPersistentDataMemory* Assets::getPersistentDataMemory()
